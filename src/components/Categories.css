@@ -1,0 +1,27 @@
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.category-card {
+    text-align: center;
+    cursor: pointer;
+}
+
+.category-icon {
+    width: 80px;
+    height: 80px;
+    background: #e8f5e9;
+    border-radius: 50%;
+    font-size: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-card p {
+    margin-top: 10px;
+    font-weight: 600;
+}

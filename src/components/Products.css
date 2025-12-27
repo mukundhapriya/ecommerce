@@ -1,0 +1,26 @@
+.products {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    padding: 20px 60px;
+}
+
+.product-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.product-img {
+    font-size: 50px;
+}
+
+.product-card button {
+    background: #2e7d32;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+}
