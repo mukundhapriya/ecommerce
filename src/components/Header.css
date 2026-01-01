@@ -1,4 +1,4 @@
-/* HEADER */
+/* ================= HEADER ================= */
 
 .header {
     display: flex;
@@ -8,34 +8,81 @@
     padding: 15px 40px;
     background-color: #ffffff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
 }
 
 
-/* LEFT : LOGO + DELIVERY */
+/* ================= LEFT ================= */
 
 .left {
     display: flex;
     align-items: center;
     gap: 20px;
+    flex: 1;
 }
 
-
-/* LOGO */
-
 .logo {
-    height: 80px;
-    /* mee size maintain */
+    height: 70px;
     width: auto;
 }
 
 
-/* DELIVERY */
+/* ================= SEARCH ================= */
+
+.search-box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.search-box input {
+    width: 100%;
+    max-width: 420px;
+    /* search box size control */
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 14px;
+}
+
+
+/* suggestions */
+
+.suggestions {
+    position: absolute;
+    top: 45px;
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    z-index: 20;
+}
+
+.suggestions div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestions div:hover {
+    background: #f5f5f5;
+}
+
+
+/* ================= DELIVERY ================= */
 
 .delivery {
     display: flex;
     flex-direction: column;
     cursor: pointer;
     white-space: nowrap;
+    text-align: right;
+    padding-right: 12px;
+    border-right: 1px solid #eee;
 }
 
 .delivery-title {
@@ -50,53 +97,32 @@
 }
 
 
-/* SEARCH */
-
-.search-box {
-    flex: 1;
-    /* 🔥 search middle lo undadaniki */
-    display: flex;
-    justify-content: center;
-}
-
-.search-box input {
-    width: 70%;
-    padding: 10px 15px;
-    border-radius: 25px;
-    border: 1px solid #ccc;
-    outline: none;
-    font-size: 14px;
-}
-
-
-/* RIGHT : LOGIN / SIGNUP / CART */
+/* ================= RIGHT ================= */
 
 .right {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 18px;
+    min-width: max-content;
+    flex-shrink: 0;
 }
 
-
-/* BUTTONS */
-
-.login-btn {
+.login-btn,
+.signup-btn {
     padding: 8px 16px;
     border-radius: 20px;
     cursor: pointer;
-    text-decoration: none;
     font-weight: 500;
     border: 1px solid #2e7d32;
+    background: transparent;
     color: #2e7d32;
 }
 
-.login-btn:hover {
+.login-btn:hover,
+.signup-btn:hover {
     background-color: #2e7d32;
     color: white;
 }
-
-
-/* CART */
 
 .cart {
     position: relative;
@@ -105,13 +131,104 @@
     color: #2e7d32;
 }
 
-.cart span {
-    position: absolute;
-    top: -8px;
-    right: -10px;
-    background-color: red;
+
+/* ================= LOCATION POPUP (RIGHT SIDE) ================= */
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+    z-index: 2000;
+}
+
+
+/* 🔥 FINAL FIXED MODAL */
+
+.location-modal {
+    background: #ffffff;
+    width: 360px;
+    height: 100vh;
+    padding: 20px;
+    box-shadow: -8px 0 20px rgba(0, 0, 0, 0.25);
+    animation: slideInRight 0.3s ease-in-out;
+    /* 🔥 IMPORTANT FIX */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+/* inputs */
+
+.location-modal input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+
+/* use location button */
+
+.use-location {
+    width: 100%;
+    background: #2e7d32;
     color: white;
-    font-size: 12px;
-    padding: 2px 6px;
-    border-radius: 50%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.use-location:hover {
+    background: #1b5e20;
+}
+
+
+/* locations list */
+
+.location-modal ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    /* 🔥 SCROLL AREA */
+    overflow-y: auto;
+}
+
+.location-modal li {
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.location-modal li:hover {
+    background: #f0f0f0;
+}
+
+
+/* close */
+
+.close-btn {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background: #f5f5f5;
+}
+
+
+/* ================= ANIMATION ================= */
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }

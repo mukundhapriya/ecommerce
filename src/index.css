@@ -1,107 +1,23 @@
+/* ===== GLOBAL RESET ===== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* ===== BODY ===== */
+
 body {
     margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
     background-color: #f4f6f8;
 }
 
 
-/* HEADER */
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 40px;
-    background-color: #2e7d32;
-    color: white;
-}
-
-.logo {
-    font-size: 24px;
-}
-
-.logo span {
-    color: #ffeb3b;
-}
-
-.search {
-    width: 300px;
-    padding: 8px 12px;
-    border-radius: 20px;
-    border: none;
-    outline: none;
-}
-
-.header-right {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-.login-btn {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.cart span {
-    background: red;
-    padding: 2px 8px;
-    border-radius: 50%;
-}
-
-
-/* HERO */
-
-.hero {
-    background: linear-gradient(to right, #43a047, #66bb6a);
-    color: white;
-    padding: 60px;
-    text-align: center;
-}
-
-
-/* CATEGORIES */
-
-.categories {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 30px 0;
-}
-
-.category-btn {
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: none;
-    background: #c8e6c9;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-
-/* PRODUCTS */
-
-.products {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    padding: 20px 40px;
-}
-
-.product-card {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.product-card button {
-    background: #2e7d32;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 20px;
-    cursor: pointer;
-}
+/*
+RULE:
+- Global styles ONLY
+- ❌ No .header, .logo, .search, .cart, .products here
+- ✅ Component styles go to their own CSS files
+*/

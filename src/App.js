@@ -2,27 +2,30 @@ import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header";
+import Footer from "./components/Footer";
+
 import Categories from "./components/Categories";
 import Products from "./components/Products";
+
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
+import Cart from "./pages/Cart";
+import Payment from "./pages/Payment";
+import OrderStatus from "./pages/OrderStatus";
 
 function App() {
     const [category, setCategory] = useState("All");
     const [search, setSearch] = useState("");
     const [cart, setCart] = useState([]);
 
-    // ➕ Add to cart
+    // 🛒 Add to cart
     const addToCart = (product) => {
-        const existingItem = cart.find((item) => item.id === product.id);
-
-        if (existingItem) {
+        const item = cart.find((i) => i.id === product.id);
+        if (item) {
             setCart(
-                cart.map((item) =>
-                    item.id === product.id ?
-                    {...item, qty: item.qty + 1 } :
-                    item
+                cart.map((i) =>
+                    i.id === product.id ? {...i, qty: i.qty + 1 } : i
                 )
             );
         } else {
@@ -30,123 +33,86 @@ function App() {
         }
     };
 
-    // ➕ Increase quantity
+    // ➕ Increase qty
     const increaseQty = (id) => {
         setCart(
-            cart.map((item) =>
-                item.id === id ? {...item, qty: item.qty + 1 } : item
+            cart.map((i) =>
+                i.id === id ? {...i, qty: i.qty + 1 } : i
             )
         );
     };
 
-    // ➖ Decrease quantity
+    // ➖ Decrease qty
     const decreaseQty = (id) => {
         setCart(
             cart
-            .map((item) =>
-                item.id === id ? {...item, qty: item.qty - 1 } : item
+            .map((i) =>
+                i.id === id ? {...i, qty: i.qty - 1 } : i
             )
-            .filter((item) => item.qty > 0)
+            .filter((i) => i.qty > 0)
         );
     };
 
-    // 🛒 Total quantity for header
-    const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+    const totalQty = cart.reduce((s, i) => s + i.qty, 0);
 
     return ( <
         BrowserRouter >
-        <
-        Header setSearch = { setSearch }
+
+        { /* ✅ HEADER */ } <
+        Header isLoggedIn = { false }
+        setSearch = { setSearch }
         cartCount = { totalQty }
+        cart = { cart }
+        increaseQty = { increaseQty }
+        decreaseQty = { decreaseQty }
         />
 
+        { /* ✅ ROUTES */ } <
+        Routes >
         <
-        Routes > { /* HOME */ } <
         Route path = "/"
         element = { <
             >
             <
             Categories setCategory = { setCategory }
-            />
-
-            <
+            /> <
             Products
             category = { category }
             search = { search }
             addToCart = { addToCart }
-            />
-
-            <
-            h3 style = {
-                { marginLeft: 20 } } > Cart Items < /h3>
-
-            {
-                cart.length === 0 && ( <
-                    p style = {
-                        { marginLeft: 20 } } > Cart is empty < /p>
-                )
-            }
-
-            {
-                cart.map((item) => ( <
-                    div key = { item.id }
-                    style = { styles.cartItem } >
-                    <
-                    span > { item.name } < /span>
-
-                    <
-                    div style = { styles.qtyBox } >
-                    <
-                    button onClick = {
-                        () => decreaseQty(item.id) } > - < /button> <
-                    span > { item.qty } < /span> <
-                    button onClick = {
-                        () => increaseQty(item.id) } > + < /button> <
-                    /div>
-
-                    <
-                    span > ₹{ item.price * item.qty } < /span> <
-                    /div>
-                ))
-            } <
+            /> <
             />
         }
         />
 
-        { /* LOGIN */ } <
+        <
         Route path = "/login"
         element = { < Login / > }
-        />
-
-        { /* SIGNUP */ } <
+        /> <
         Route path = "/signup"
         element = { < Signup / > }
-        />
-
-        { /* FORGOT PASSWORD */ } <
+        /> <
         Route path = "/forgot-password"
         element = { < ForgotPassword / > }
         /> <
-        /Routes> <
-        /BrowserRouter>
-    );
-}
+        Route path = "/cart"
+        element = { < Cart cart = { cart }
+            />} / >
+            <
+            Route path = "/payment"
+            element = { < Payment / > }
+            /> <
+            Route path = "/order-status"
+            element = { < OrderStatus / > }
+            /> <
+            /Routes>
 
-const styles = {
-    cartItem: {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        margin: "10px 20px",
-        padding: 10,
-        background: "#fff",
-        borderRadius: 8,
-    },
-    qtyBox: {
-        display: "flex",
-        alignItems: "center",
-        gap: 10,
-    },
-};
+            { /* ✅ FOOTER — MUST BE HERE */ } <
+            Footer / >
 
-export default App;
+            <
+            /BrowserRouter>
+        );
+    }
+
+    export default App;

@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Categories.css";
 
 function Categories({ setCategory }) {
+    const [active, setActive] = useState("All");
+
     const categories = ["All", "Vegetables", "Fruits", "Dairy"];
 
+    const handleClick = (cat) => {
+        setActive(cat);
+        setCategory(cat);
+    };
+
     return ( <
-        div style = {
-            { textAlign: "center", margin: 20 } } > {
+        div className = "category-container" > {
             categories.map((cat) => ( <
                 button key = { cat }
+                className = { `category-btn ${active === cat ? "active" : ""}` }
                 onClick = {
-                    () => setCategory(cat) }
-                style = {
-                    { margin: 10, padding: "8px 15px" } } >
+                    () => handleClick(cat) } >
                 { cat } <
                 /button>
             ))
